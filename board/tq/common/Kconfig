@@ -14,3 +14,30 @@ config TQ_COMMON_SDMMC
 
 config TQ_COMMON_SOM
 	bool
+
+config TQ_COMMON_SPL_BOARD_SETUP
+	bool
+	depends on SPL
+
+config TQ_COMMON_SYSINFO
+	bool
+	select SYSINFO
+	imply SYSINFO_TQ_EEPROM
+
+if TQ_COMMON_SYSINFO
+
+config TQ_COMMON_SYSINFO_MACADDR_OFFSET
+	int "TQ EEPROM MAC address offset"
+	default 1
+	help
+	  Set ethXaddr variables based on EEPROM contents
+	  starting with this offset
+
+config TQ_COMMON_SYSINFO_MACADDR_NUM
+	int "TQ EEPROM MAC address number"
+	default 1
+	help
+	  Number of ethXaddr variables to set
+	  based on EEPROM contents
+
+endif

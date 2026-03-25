@@ -8,3 +8,7 @@
 obj-$(CONFIG_TQ_COMMON_BB) += tq_bb.o
 obj-$(CONFIG_TQ_COMMON_SOM) += tq_som.o
 obj-$(CONFIG_TQ_COMMON_SDMMC) += tq_sdmmc.o
+
+ifneq ($(CONFIG_XPL_BUILD),y)
+obj-$(CONFIG_TQ_COMMON_SYSINFO) += tq_sysinfo.o
+endif
