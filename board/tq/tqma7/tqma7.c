@@ -14,9 +14,11 @@
 #include <asm/arch/clock.h>
 #include <asm/arch/imx-regs.h>
 #include <asm/arch/sys_proto.h>
+#include <dm/uclass.h>
 
 #include "../common/tq_bb.h"
 #include "../common/tq_som.h"
+#include "../common/tq_sysinfo.h"
 
 DECLARE_GLOBAL_DATA_PTR;
 
@@ -64,6 +66,8 @@ int board_late_init(void)
 	}
 
 	env_set_runtime("board_name", bname);
+
+	tq_common_sysinfo_setup();
 
 	return tq_bb_board_late_init();
 }

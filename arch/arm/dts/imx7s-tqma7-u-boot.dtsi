@@ -9,6 +9,13 @@
 
 #include "imx7s-u-boot.dtsi"
 
+/ {
+	sysinfo_mba7: sysinfo {
+		compatible = "tq,eeprom-sysinfo";
+		i2c-eeprom = <&m24c64>;
+	};
+};
+
 &soc {
 	bootph-pre-ram;
 };
