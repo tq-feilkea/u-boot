@@ -8,6 +8,10 @@
  */
 
 #include <env.h>
+#include <fdt_support.h>
+#include <mtd_node.h>
+#include <net.h>
+#include <spi_flash.h>
 #include <sysinfo/tq_eeprom.h>
 
 #define MAX_NAME_LENGTH	80
@@ -15,6 +19,8 @@
 void tq_common_sysinfo_setup(void)
 {
 	struct udevice *sysinfo;
+	size_t macaddr_size;
+	void *macaddr;
 	char buf[MAX_NAME_LENGTH] = "";
 	int ret;
 
