@@ -11,6 +11,7 @@
 
 #ifndef CONFIG_XPL_BUILD
 
+size_t tq_common_sysinfo_macaddr_num(void);
 void tq_common_sysinfo_setup(void);
 
 #endif
