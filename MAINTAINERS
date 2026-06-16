@@ -65,6 +65,11 @@ F:	include/alist.h
 F:	lib/alist.c
 F:	test/lib/alist.c
 
+AMD VERSAL2 PCIE DRIVER
+M:	Pranav Sanwal <pranav.sanwal@amd.com>
+S:	Maintained
+F:	drivers/pci/pcie_dw_amd.c
+
 ANDROID AB
 M:	Mattijs Korpershoek <mkorpershoek@kernel.org>
 R:	Igor Opaniuk <igor.opaniuk@gmail.com>
@@ -470,7 +475,7 @@ F:	configs/eDPU_defconfig
 F:	configs/uDPU_defconfig
 
 ARM MICROCHIP/ATMEL AT91
-M:	Eugen Hristev <eugen.hristev@microchip.com>
+M:	Eugen Hristev <ehristev@kernel.org>
 S:	Maintained
 T:	git https://source.denx.de/u-boot/custodians/u-boot-at91.git
 F:	arch/arm/dts/at91*
@@ -680,6 +685,7 @@ F:	drivers/*/*/pm8???-*
 F:	drivers/gpio/msm_gpio.c
 F:	drivers/mmc/msm_sdhci.c
 F:	drivers/phy/msm8916-usbh-phy.c
+F:	drivers/phy/qcom/
 F:	drivers/serial/serial_msm.c
 F:	drivers/serial/serial_msm_geni.c
 F:	drivers/smem/msm_smem.c

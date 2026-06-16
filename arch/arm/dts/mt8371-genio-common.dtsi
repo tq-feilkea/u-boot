@@ -19,6 +19,51 @@
 		stdout-path = "serial0:921600n8";
 	};
 
+	usb_p0_vbus: regulator@0 {
+		compatible = "regulator-fixed";
+		regulator-name = "p0_vbus";
+		regulator-min-microvolt = <5000000>;
+		regulator-max-microvolt = <5000000>;
+		gpio = <&pio 82 0>;
+		enable-active-high;
+	};
+
+	usb_p1_vbus: regulator@1 {
+		compatible = "regulator-fixed";
+		regulator-name = "p1_vbus";
+		regulator-min-microvolt = <5000000>;
+		regulator-max-microvolt = <5000000>;
+		gpio = <&pio 84 0>;
+		enable-active-high;
+	};
+
+	usb_p2_vbus: regulator@2 {
+		compatible = "regulator-fixed";
+		regulator-name = "p2_vbus";
+		regulator-min-microvolt = <5000000>;
+		regulator-max-microvolt = <5000000>;
+		gpio = <&pio 85 0>;
+		enable-active-high;
+	};
+
+	usb_p3_vbus: regulator@3 {
+		compatible = "regulator-fixed";
+		regulator-name = "p3_vbus";
+		regulator-min-microvolt = <5000000>;
+		regulator-max-microvolt = <5000000>;
+		gpio = <&pio 86 0>;
+		enable-active-high;
+	};
+
+	usb_p4_vbus: regulator@4 {
+		compatible = "regulator-fixed";
+		regulator-name = "p4_vbus";
+		regulator-min-microvolt = <5000000>;
+		regulator-max-microvolt = <5000000>;
+		gpio = <&pio 87 0>;
+		enable-active-high;
+	};
+
 	firmware {
 		optee {
 			compatible = "linaro,optee-tz";
@@ -115,6 +160,21 @@
 
 &mt6359_vufs_ldo_reg {
 	regulator-always-on;
+};
+
+&nor_flash {
+	pinctrl-names = "default";
+	pinctrl-0 = <&nor_pins>;
+
+	status = "okay";
+
+	flash@0 {
+		compatible = "jedec,spi-nor";
+		reg = <0>;
+		spi-max-frequency = <52000000>;
+		spi-rx-bus-width = <2>;
+		spi-tx-bus-width = <2>;
+	};
 };
 
 &pio {
@@ -229,6 +289,22 @@
 		};
 	};
 
+	nor_pins: nor-pins {
+		pins-ck-io {
+			pinmux = <PINMUX_GPIO150__FUNC_SPINOR_CK>,
+				 <PINMUX_GPIO152__FUNC_SPINOR_IO0>,
+				 <PINMUX_GPIO153__FUNC_SPINOR_IO1>;
+			drive-strength = <8>;
+			bias-pull-down;
+		};
+
+		pins-cs {
+			pinmux = <PINMUX_GPIO151__FUNC_SPINOR_CS>;
+			drive-strength = <8>;
+			bias-pull-up;
+		};
+	};
+
 	uart0_pins: uart0-pins {
 		pins {
 			pinmux = <PINMUX_GPIO31__FUNC_UTXD0>,
@@ -240,4 +316,29 @@
 
 &pmic {
 	interrupts-extended = <&pio 194 IRQ_TYPE_LEVEL_HIGH>;
+};
+
+&xhci0{
+	vbus-supply = <&usb_p0_vbus>;
+	status = "okay";
+};
+
+&xhci1{
+	vbus-supply = <&usb_p1_vbus>;
+	status = "okay";
+};
+
+&xhci2{
+	vbus-supply = <&usb_p2_vbus>;
+	status = "okay";
+};
+
+&xhci3{
+	vbus-supply = <&usb_p3_vbus>;
+	status = "okay";
+};
+
+&xhci4{
+	vbus-supply = <&usb_p4_vbus>;
+	status = "okay";
 };

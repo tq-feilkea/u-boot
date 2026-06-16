@@ -106,6 +106,8 @@ done:
 	if (DWC3_VER_IS_WITHIN(DWC31, ANY, 180A))
 		mdelay(50);
 
+	mdelay(100);
+
 	return 0;
 }
 
@@ -206,6 +208,7 @@ static void dwc3_free_one_event_buffer(struct dwc3 *dwc,
 		struct dwc3_event_buffer *evt)
 {
 	dma_free_coherent(evt->buf);
+	free(evt);
 }
 
 /**
@@ -252,6 +255,8 @@ static void dwc3_free_event_buffers(struct dwc3 *dwc)
 		if (evt)
 			dwc3_free_one_event_buffer(dwc, evt);
 	}
+
+	free(dwc->ev_buffs);
 }
 
 /**

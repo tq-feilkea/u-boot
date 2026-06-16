@@ -495,7 +495,7 @@ static int initr_boot_led_on(void)
 	return 0;
 }
 
-#if CONFIG_IS_ENABLED(NET) || CONFIG_IS_ENABLED(NET_LWIP)
+#if CONFIG_IS_ENABLED(NET)
 static int initr_net(void)
 {
 	puts("Net:   ");
@@ -569,11 +569,15 @@ static int dm_announce(void)
 
 static int run_main_loop(void)
 {
+	int ret;
+
 #ifdef CONFIG_SANDBOX
 	sandbox_main_loop_init();
 #endif
 
-	event_notify_null(EVT_MAIN_LOOP);
+	ret = event_notify_null(EVT_MAIN_LOOP);
+	if (ret)
+		return ret;
 
 	/* main_loop() can return to retry autoboot, if so just run it again */
 	for (;;)
@@ -756,7 +760,7 @@ static void initcall_run_r(void)
 #if CONFIG_IS_ENABLED(PCI_ENDPOINT)
 	INITCALL(pci_ep_init);
 #endif
-#if CONFIG_IS_ENABLED(NET) || CONFIG_IS_ENABLED(NET_LWIP)
+#if CONFIG_IS_ENABLED(NET)
 	WATCHDOG_RESET();
 	INITCALL(initr_net);
 #endif
